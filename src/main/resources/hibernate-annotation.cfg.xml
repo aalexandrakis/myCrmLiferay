@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory name="">
+        <!-- <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/myCrm?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=UTF-8</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>  
+        org.hibernate.HibernateException: No CurrentSessionContext configured! -->
+        <!-- <property name="hibernate.current_session_context_class">thread</property> -->
+         
+        <!-- Encoding  -->
+        <!-- <property name="hibernate.connection.CharSet">UTF-8</property>
+        <property name="hibernate.connection.characterEncoding">UTF-8</property>
+        <property name="hibernate.connection.useUnicode">true</property> -->
+        
+        <!-- Mapping with model class containing annotations -->
+        <mapping class="com.aalexandrakis.mycrmliferay.models.CompanyInfo"/>
+        <!-- <mapping class="com.aalexandrakis.mycrm.models.User"/>
+        <mapping class="com.aalexandrakis.mycrm.models.Role"/>
+        <mapping class="com.aalexandrakis.mycrm.models.Customer"/>
+        <mapping class="com.aalexandrakis.mycrm.models.Supplier"/>
+        <mapping class="com.aalexandrakis.mycrm.models.Invoice"/>
+        <mapping class="com.aalexandrakis.mycrm.models.InvoiceLine"/>
+        <mapping class="com.aalexandrakis.mycrm.models.Outcome"/>
+        <mapping class="com.aalexandrakis.mycrm.models.OutcomeLine"/> -->
+        
+    </session-factory>
+</hibernate-configuration>

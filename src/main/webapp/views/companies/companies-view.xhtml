@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+
+<f:view
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+>
+	<h:head />
+	<h:body>
+		<h:form id="form" >
+		 	   <p:growl id="msgs" showDetail="true" />
+		 
+				<p:dataTable id="companiesTable" var="company" value="#{dtCompaniesView.companies}" >
+			        <f:facet name="header">
+			            Companies List
+			        </f:facet>
+			        <!-- <p:column selectionMode="single" style="width:16px;text-align:center"/>-->
+			        <p:column style="width:32px">  
+			            <p:commandButton update=":form:companyDetail" oncomplete="PF('companyDialog').show()"  
+			                    image="ui-icon ui-icon-search">  
+			                <f:setPropertyActionListener value="#{company}"  
+			                    target="#{dtCompaniesView.selectedCompany}" />  
+			            </p:commandButton>  
+			        </p:column> 
+			        <p:column headerText="Κωδικός">
+			            <h:outputText value="#{company.companyId}" />
+			        </p:column>
+			        <p:column headerText="Επωνυμία">
+			            <h:outputText value="#{company.name}" />
+			        </p:column>
+			        <p:column headerText="Επάγγελμα">
+			            <h:outputText value="#{company.busDesc}" />
+			        </p:column>
+			        <p:column headerText="Τηλέφωνο">
+			            <h:outputText value="#{company.workPhone}" />
+			        </p:column>
+			        <p:column headerText="Κινητό">
+			            <h:outputText value="#{company.mobilePhone}" />
+			        </p:column>
+			        <p:column headerText="ΑΦΜ">
+			            <h:outputText value="#{company.afm}" />
+			        </p:column>
+			        <p:column headerText="ΔΟΥ">
+			            <h:outputText value="#{company.doy}" />
+			        </p:column>
+			        <p:column headerText="Διεύθυνση">
+			            <h:outputText value="#{company.address}" />
+			        </p:column>
+			        <f:facet name="footer">
+			            <p:commandButton process="companiesTable" update=":form:companyDetail" icon="ui-icon-plus" value="Add New Company" oncomplete="PF('companyDialog').show()" />
+			        </f:facet>
+			    </p:dataTable>
+			    <p:dialog header="Company" widgetVar="companyDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+					<p:outputPanel id="companyDetail" style="text-align:right;">
+						<p:panelGrid   columns="2" columnClasses="label,value">
+	                        <h:outputText value="Κωδικός:" />
+			                <h:outputText value="#{dtCompaniesView.selectedCompany.companyId}"/>
+	
+			                <h:outputText value="Επάγγελμα:" />
+			                <h:inputText value="#{dtCompaniesView.selectedCompany.busDesc}" required="true"/>
+										 	
+			                <h:outputText value="Τηλέφωνο:" />
+			                <h:inputText value="#{dtCompaniesView.selectedCompany.workPhone}" required="true"/>
+										 	
+			                <h:outputText value="Κινητό:" />
+			                <h:inputText value="#{dtCompaniesView.selectedCompany.mobilePhone}" required="true"/>
+										 	
+			                <h:outputText value="ΑΦΜ:" />
+			                <h:inputText value="#{dtCompaniesView.selectedCompany.afm}" required="true"/>
+										 	
+			                <h:outputText value="ΔΟΥ:" />
+			                <h:inputText value="#{dtCompaniesView.selectedCompany.doy}" required="true"/>
+										 	
+			                <h:outputText value="Διεύθυνση:" />
+			                <h:inputText value="#{dtCompaniesView.selectedCompany.address}" required="true"/>
+			                
+			                <p:commandButton value="Save" id="save" update=":form:companiesTable" actionListener="#{dtCompaniesView.saveCompany()}" icon="ui-icon-disk" oncomplete="PF('companyDialog').hide()"/>
+			            </p:panelGrid>
+		            </p:outputPanel>
+			    </p:dialog>
+	    </h:form>
+	</h:body>
+</f:view>

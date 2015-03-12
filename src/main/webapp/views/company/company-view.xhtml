@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+
+<f:view
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+>
+	<h:head />
+	<h:body>
+		<h:form id="form">
+		   <p:panel id="panel">
+		 	   <p:messages id="msgs"/>
+		 	   <p:outputLabel for="companyId" value="Κωδικός:" />
+		 	   <p:inputText id="companyId" value="#{dtCompanyView.company.companyId}" readonly="true"/>
+		 	   <!--<br/>-->
+		 	   <p:outputLabel for="name" value="Επωνυμία:" />
+		 	   <p:inputText id="name" value="#{dtCompanyView.company.name}" style="width:80%"/>
+		 	   <!--<br/>-->
+		 	   <p:outputLabel for="busDesc" value="Επάγγελμα:" />
+		 	   <p:inputText id="busDesc" value="#{dtCompanyView.company.busDesc}" style="width:80%"/>
+		 	   <!--<br/>-->
+		 	   <p:outputLabel for="workPhone" value="Τηλέφωνο:" />
+		 	   <p:inputText id="workPhone" value="#{dtCompanyView.company.workPhone}"/>
+		 	   <!--<br/>-->
+		 	   <p:outputLabel for="mobilePhone" value="Κινητό:" />
+		 	   <p:inputText id="mobilePhone" value="#{dtCompanyView.company.mobilePhone}"/>
+		 	   <!--<br/>-->
+		 	   <p:outputLabel for="afm" value="ΑΦΜ:" />
+		 	   <p:inputText id="afm" value="#{dtCompanyView.company.afm}"/>
+		 	   <!--<br/>-->
+		 	   <p:outputLabel for="doy" value="ΔΟΥ:" />
+		 	   <p:inputText id="doy" value="#{dtCompanyView.company.doy}"/>
+		 	   <!--<br/>-->
+		 	   <p:outputLabel for="address" value="Διεύθυνση:" />
+		 	   <p:inputText id="address" value="#{dtCompanyView.company.address}" style="width:80%"/>
+		 	   <br/>
+	 	   </p:panel>
+	 	   <p:commandButton value="Save" id="save" update="panel" actionListener="#{dtCompanyView.saveCompany()}" icon="ui-icon-disk" />
+	 	</h:form>
+	</h:body>
+</f:view>
