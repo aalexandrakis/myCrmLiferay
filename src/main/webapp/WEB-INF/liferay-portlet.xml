@@ -21,6 +21,7 @@
 			/js/main.js
 		</footer-portlet-javascript>
 		<css-class-wrapper>company-portlet</css-class-wrapper>
+		<add-default-resource>true</add-default-resource> 
 	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>

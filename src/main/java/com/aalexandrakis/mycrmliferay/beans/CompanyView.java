@@ -34,7 +34,7 @@ public class CompanyView implements Serializable {
 		this.company = company;
 	}
 
-	public void saveCompany(){
+	public void saveCompanyA(){
 		System.out.println(" Company name :" + company.getName());
 		try {
 			if (company.getCompanyId() != null){

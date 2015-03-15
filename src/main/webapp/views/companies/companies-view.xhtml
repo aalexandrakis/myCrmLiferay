@@ -9,17 +9,19 @@
 	xmlns:p="http://primefaces.org/ui"
 >
 	<h:head />
+        
 	<h:body>
 		<h:form id="form" >
 		 	   <p:growl id="msgs" showDetail="true" />
-		 
+		 		<p:commandButton value="Νέα Εταρεία" id="newCompany" update=":companyCreateForm:newCompanyDetail" actionListener="#{dtCompaniesView.addCompany()}" icon="ui-icon-plus" oncomplete="PF('newCompanyDialog').show()"/>
+		 		<!-- <a href="#{dtCompaniesView.portletRenderURL}">click me to open popup for other portlet</a> -->
 				<p:dataTable id="companiesTable" var="company" value="#{dtCompaniesView.companies}" >
-			        <f:facet name="header">
+			        <!-- <f:facet name="header">
 			            Companies List
-			        </f:facet>
+			        </f:facet> -->
 			        <!-- <p:column selectionMode="single" style="width:16px;text-align:center"/>-->
 			        <p:column style="width:32px">  
-			            <p:commandButton update=":form:companyDetail" oncomplete="PF('companyDialog').show()"  
+			            <p:commandButton update=":companyUpdateForm:companyDetail" oncomplete="PF('companyDialog').show()"  
 			                    image="ui-icon ui-icon-search">  
 			                <f:setPropertyActionListener value="#{company}"  
 			                    target="#{dtCompaniesView.selectedCompany}" />  
@@ -49,38 +51,96 @@
 			        <p:column headerText="Διεύθυνση">
 			            <h:outputText value="#{company.address}" />
 			        </p:column>
-			        <f:facet name="footer">
-			            <p:commandButton process="companiesTable" update=":form:companyDetail" icon="ui-icon-plus" value="Add New Company" oncomplete="PF('companyDialog').show()" />
-			        </f:facet>
+			        <!-- <f:facet name="footer">
+			            <p:commandButton process="radioDT" update=":form:companyDetail" icon="ui-icon-edit" value="Edit" oncomplete="PF('companyDialog').show()" />
+			        </f:facet> -->
 			    </p:dataTable>
-			    <p:dialog header="Company" widgetVar="companyDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-					<p:outputPanel id="companyDetail" style="text-align:right;">
-						<p:panelGrid   columns="2" columnClasses="label,value">
-	                        <h:outputText value="Κωδικός:" />
-			                <h:outputText value="#{dtCompaniesView.selectedCompany.companyId}"/>
-	
-			                <h:outputText value="Επάγγελμα:" />
-			                <h:inputText value="#{dtCompaniesView.selectedCompany.busDesc}" required="true"/>
-										 	
-			                <h:outputText value="Τηλέφωνο:" />
-			                <h:inputText value="#{dtCompaniesView.selectedCompany.workPhone}" required="true"/>
-										 	
-			                <h:outputText value="Κινητό:" />
-			                <h:inputText value="#{dtCompaniesView.selectedCompany.mobilePhone}" required="true"/>
-										 	
-			                <h:outputText value="ΑΦΜ:" />
-			                <h:inputText value="#{dtCompaniesView.selectedCompany.afm}" required="true"/>
-										 	
-			                <h:outputText value="ΔΟΥ:" />
-			                <h:inputText value="#{dtCompaniesView.selectedCompany.doy}" required="true"/>
-										 	
-			                <h:outputText value="Διεύθυνση:" />
-			                <h:inputText value="#{dtCompaniesView.selectedCompany.address}" required="true"/>
-			                
-			                <p:commandButton value="Save" id="save" update=":form:companiesTable" actionListener="#{dtCompaniesView.saveCompany()}" icon="ui-icon-disk" oncomplete="PF('companyDialog').hide()"/>
-			            </p:panelGrid>
-		            </p:outputPanel>
-			    </p:dialog>
 	    </h:form>
+	     <p:dialog header="Company" widgetVar="companyDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false" dynamic="true">
+	    	<h:form id="companyUpdateForm">
+	    		<p:messages  showDetails="false"/>
+	    		<h:panelGrid  id="companyDetail" columns="3" rendered="#{not empty dtCompaniesView.selectedCompany}" columnClasses="label,value">
+                    <h:outputText value="Κωδικός:" />
+	                <h:outputText id="id" value="#{dtCompaniesView.selectedCompany.companyId}"/>
+					<p:message for="id"/>
+						
+	                <h:outputText value="Επωνυμία:" />
+	                <h:inputText id="name" value="#{dtCompaniesView.selectedCompany.name}" required="true" style="width: 500px" requiredMessage="Δεν συμπληρώσατε επωνυμία."/>
+					<p:message for="name"/>
+					
+	                <h:outputText value="Επάγγελμα:" />
+	                <h:inputText id="busDesc" value="#{dtCompaniesView.selectedCompany.busDesc}" required="true" style="width: 500px" requiredMessage="Δεν συμπληρώσατε δραστηριότητα."/>
+					<p:message for="busDesc"/>
+					
+					<h:outputText value="Email:" />
+	                <h:inputText id="email" value="#{dtCompaniesView.selectedCompany.email}" required="true" style="width: 500px" requiredMessage="Δεν συμπληρώσατε email."/>
+					<p:message for="email"/>
+							 	
+	                <h:outputText value="Τηλέφωνο:" />
+	                <h:inputText id="phone" value="#{dtCompaniesView.selectedCompany.workPhone}" required="true" style="width:500px"  requiredMessage="Δεν συμπληρώσατε τηλέφωνο."/>
+				 	<p:message for="phone"/>
+				 	
+	                <h:outputText value="Κινητό:" />
+	                <h:inputText id="mobile" value="#{dtCompaniesView.selectedCompany.mobilePhone}" required="true" style="width:500px" requiredMessage="Δεν συμπληρώσατε κινητό τηλέφωνο."/>
+					<p:message for="mobile"/>
+				 	
+	                <h:outputText value="ΑΦΜ:" />
+	                <h:inputText id="afm" value="#{dtCompaniesView.selectedCompany.afm}" required="true" style="width:500px" requiredMessage="Δεν συμπληρώσατε ΑΦΜ."/>
+				 	<p:message for="afm"/>
+				 	
+	                <h:outputText value="ΔΟΥ:" />
+	                <h:inputText id="doy" value="#{dtCompaniesView.selectedCompany.doy}" required="true" style="width:500px" requiredMessage="Δεν συμπληρώσατε ΔΟΥ."/>
+				 	<p:message for="doy"/>
+				 	
+	                <h:outputText value="Διεύθυνση:" />
+	                <h:inputText id="address" value="#{dtCompaniesView.selectedCompany.address}" required="true" style="width:500px" requiredMessage="Δεν συμπληρώσατε διεύθυνση."/>
+	                <p:message for="address"/>
+	            </h:panelGrid>
+                <p:commandButton value="Save" id="update" validateClient="true" process="companyUpdateForm" update="companyDetail,:form:companiesTable" actionListener="#{dtCompaniesView.saveCompany()}" icon="ui-icon-disk" oncomplete="if (args &amp;&amp; !args.validationFailed) { PF('companyDialog').hide(); }"/>
+	            <p:commandButton value="Cancel" onclick="PF('companyDialog').hide()"/>
+                
+			</h:form>
+	    </p:dialog>
+	    
+	    <p:dialog header="Add New Company" widgetVar="newCompanyDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false" dynamic="true">
+	    	<h:form id="companyCreateForm">
+	    		<p:messages  showDetails="false"/>
+	    		<h:panelGrid id="newCompanyDetail"  columns="3" rendered="#{not empty dtCompaniesView.selectedCompany}" columnClasses="label,value">
+	                <h:outputText value="Επωνυμία:" />
+	                <h:inputText id="name" value="#{dtCompaniesView.selectedCompany.name}" style="width: 500px" title="Επωνυμία" required="true" requiredMessage="Δεν συμπληρώσατε επωνυμία."/>
+					<p:message for="name"/>
+					
+	                <h:outputText value="Επάγγελμα:" />
+	                <h:inputText id="busDesc" value="#{dtCompaniesView.selectedCompany.busDesc}" required="true" style="width: 500px" requiredMessage="Δεν συμπληρώσατε δραστηριότητα."/>
+					<p:message for="busDesc"/>
+					
+					<h:outputText value="Email:" />
+	                <h:inputText id="email" value="#{dtCompaniesView.selectedCompany.email}" required="true" style="width: 500px" requiredMessage="Δεν συμπληρώσατε email."/>
+					<p:message for="email"/>
+							 	
+	                <h:outputText value="Τηλέφωνο:" />
+	                <h:inputText id="phone" value="#{dtCompaniesView.selectedCompany.workPhone}" required="true" style="width:500px"  requiredMessage="Δεν συμπληρώσατε τηλέφωνο."/>
+				 	<p:message for="phone"/>
+				 	
+	                <h:outputText value="Κινητό:" />
+	                <h:inputText id="mobile" value="#{dtCompaniesView.selectedCompany.mobilePhone}" required="true" style="width:500px" requiredMessage="Δεν συμπληρώσατε κινητό τηλέφωνο."/>
+					<p:message for="mobile"/>
+				 	
+	                <h:outputText value="ΑΦΜ:" />
+	                <h:inputText id="afm" value="#{dtCompaniesView.selectedCompany.afm}" required="true" style="width:500px" requiredMessage="Δεν συμπληρώσατε ΑΦΜ."/>
+				 	<p:message for="afm"/>
+				 	
+	                <h:outputText value="ΔΟΥ:" />
+	                <h:inputText id="doy" value="#{dtCompaniesView.selectedCompany.doy}" required="true" style="width:500px" requiredMessage="Δεν συμπληρώσατε ΔΟΥ."/>
+				 	<p:message for="doy"/>
+				 	
+	                <h:outputText value="Διεύθυνση:" />
+	                <h:inputText id="address" value="#{dtCompaniesView.selectedCompany.address}" required="true" style="width:500px" requiredMessage="Δεν συμπληρώσατε διεύθυνση."/>
+	                <p:message for="address"/>
+	            </h:panelGrid>
+	            <p:commandButton value="Save" id="create" validateClient="true" update="newCompanyDetail :form:companiesTable" actionListener="#{dtCompaniesView.saveCompany()}" icon="ui-icon-disk" oncomplete="if (args &amp;&amp; !args.validationFailed) { PF('newCompanyDialog').hide(); }"/>
+	            <p:commandButton value="Cancel" onclick="PF('newCompanyDialog').hide()"/>
+               </h:form>
+	    </p:dialog>
 	</h:body>
 </f:view>

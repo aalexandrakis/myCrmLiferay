@@ -8,6 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 
 @Entity
@@ -22,20 +27,22 @@ public class CompanyInfo implements Serializable{
 	@Column(name="companyId")
 	private Integer companyId;
 	@Column(name="name")
+	@NotEmpty
+	@NotNull
 	private String name;
-	@Column(name="busDesc")
+	@NotNull @NotEmpty @Column(name="busDesc")
 	private String busDesc;
-	@Column(name="address")
+	@NotNull @NotEmpty @Column(name="address")
 	private String address;
-	@Column(name="afm")
+	@NotNull @NotEmpty @Size(min=9, max=9) @Column(name="afm")
 	private String afm;
-	@Column(name="doy")
+	@NotNull @NotEmpty @Column(name="doy")
 	private String doy;
-	@Column(name="mobilePhone")
+	@NotNull @NotEmpty @Column(name="mobilePhone")
 	private String mobilePhone;
-	@Column(name="workPhone")
+	@NotNull @NotEmpty @Column(name="workPhone")
 	private String workPhone;
-	@Column(name="email")
+	@NotNull @NotEmpty @Email @Column(name="email")
 	private String email;
 	
 	public CompanyInfo() {
