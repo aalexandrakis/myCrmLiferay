@@ -7,5 +7,7 @@
 		<portlet id="companies"></portlet>
 		<portlet id="company"></portlet>
 		<portlet id="customers"></portlet>
+		<portlet id="suppliers"></portlet>
+		<portlet id="invoices"></portlet>
 	</category>
 </display>

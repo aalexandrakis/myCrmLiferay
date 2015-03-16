@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+
+<f:view
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+>
+	<h:head />
+        
+	<h:body>
+		<h:form id="form" >
+		 	   <p:growl id="msgs" showDetail="true" />
+				<p:dataTable id="invoicesTable" var="invoice" value="#{dtInvoicesView.invoices }" >
+			        <!-- <f:facet name="header">
+			            Customers List
+			        </f:facet> -->
+			        <!-- <p:column selectionMode="single" style="width:16px;text-align:center"/>-->
+			        <p:column headerText="Αριθμός">
+			            <h:outputText value="#{invoice.invoiceId}" />
+			        </p:column>
+			        <p:column headerText="Ημερομηνία">
+			            <h:outputText value="#{invoice.invoiceDate}" />
+			        </p:column>
+			        <p:column headerText="Εταιρεία">
+			            <h:outputText value="#{invoice.companyInfo.name}" />
+			        </p:column>
+			        <p:column headerText="Πελάτης">
+			            <h:outputText value="#{invoice.customer.customerName}" />
+			        </p:column>
+			        <p:column headerText="Ποσό">
+			            <h:outputText value="#{invoice.amount}" />
+			        </p:column>
+			        <p:column headerText="ΦΠΑ">
+			            <h:outputText value="#{invoice.fpa}" />
+			        </p:column>
+			        <p:column headerText="Σύνολο">
+			            <h:outputText value="#{invoice.gross}" />
+			        </p:column>
+			        <!-- <f:facet name="footer">
+			            <p:commandButton process="radioDT" update=":form:customersDetail" icon="ui-icon-edit" value="Edit" oncomplete="PF('customersDialog').show()" />
+			        </f:facet> -->
+			    </p:dataTable>
+	    </h:form>
+	</h:body>
+</f:view>

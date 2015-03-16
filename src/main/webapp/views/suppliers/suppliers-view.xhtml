@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+
+<f:view
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+>
+	<h:head />
+        
+	<h:body>
+		<h:form id="form" >
+		 	   <p:growl id="msgs" showDetail="true" />
+		 		<p:commandButton value="Νέος προμηθευτής" id="newSupplier" update=":supplierCreateForm:newSupplierDetail" actionListener="#{dtSuppliersView.addSupplier()}" icon="ui-icon-plus" oncomplete="PF('newSupplierDialog').show()"/>
+				<p:dataTable id="suppliersTable" var="supplier" value="#{dtSuppliersView.suppliers }" >
+			        <!-- <f:facet name="header">
+			            Suppliers List
+			        </f:facet> -->
+			        <!-- <p:column selectionMode="single" style="width:16px;text-align:center"/>-->
+			        <p:column style="width:32px">  
+			            <p:commandButton update=":supplierUpdateForm:supplierDetail" oncomplete="PF('supplierDialog').show()"  
+			                    image="ui-icon ui-icon-search">  
+			                <f:setPropertyActionListener value="#{supplier}"  
+			                    target="#{dtSuppliersView.selectedSupplier}" />  
+			            </p:commandButton>  
+			        </p:column> 
+			        <p:column headerText="Κωδικός">
+			            <h:outputText value="#{supplier.supplierId}" />
+			        </p:column>
+			        <p:column headerText="Επωνυμία">
+			            <h:outputText value="#{supplier.supplierName}" />
+			        </p:column>
+			        <p:column headerText="Επάγγελμα">
+			            <h:outputText value="#{supplier.supplierBusDesc}" />
+			        </p:column>
+			        <p:column headerText="Τηλέφωνο">
+			            <h:outputText value="#{supplier.supplierPhone}" />
+			        </p:column>
+			        <p:column headerText="ΑΦΜ">
+			            <h:outputText value="#{supplier.supplierAfm}" />
+			        </p:column>
+			        <p:column headerText="ΔΟΥ">
+			            <h:outputText value="#{supplier.supplierDoy}" />
+			        </p:column>
+			        <p:column headerText="Διεύθυνση">
+			            <h:outputText value="#{supplier.supplierAddress}" />
+			        </p:column>
+			        <!-- <f:facet name="footer">
+			            <p:commandButton process="radioDT" update=":form:suppliersDetail" icon="ui-icon-edit" value="Edit" oncomplete="PF('suppliersDialog').show()" />
+			        </f:facet> -->
+			    </p:dataTable>
+	    </h:form>
+	     <p:dialog header="Supplier" widgetVar="supplierDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false" dynamic="true">
+	    	<h:form id="supplierUpdateForm">
+	    		<p:messages  showDetails="false"/>
+	    		<h:panelGrid  id="supplierDetail" columns="3" rendered="#{not empty dtSuppliersView.selectedSupplier}" columnClasses="label,value">
+                    <h:outputText value="Κωδικός:" />
+	                <h:outputText id="id" value="#{dtSuppliersView.selectedSupplier.supplierId}"/>
+					<p:message for="id"/>
+						
+	                <h:outputText value="Επωνυμία:" />
+	                <h:inputText id="name" value="#{dtSuppliersView.selectedSupplier.supplierName}" required="true" style="width: 500px" requiredMessage="Δεν συμπληρώσατε επωνυμία."/>
+					<p:message for="name"/>
+					
+	                <h:outputText value="Επάγγελμα:" />
+	                <h:inputText id="busDesc" value="#{dtSuppliersView.selectedSupplier.supplierBusDesc}" required="true" style="width: 500px" requiredMessage="Δεν συμπληρώσατε δραστηριότητα."/>
+					<p:message for="busDesc"/>
+					
+	                <h:outputText value="Τηλέφωνο:" />
+	                <h:inputText id="phone" value="#{dtSuppliersView.selectedSupplier.supplierPhone}" required="true" style="width:500px"  requiredMessage="Δεν συμπληρώσατε τηλέφωνο."/>
+				 	<p:message for="phone"/>
+				 	
+	                <h:outputText value="ΑΦΜ:" />
+	                <h:inputText id="afm" value="#{dtSuppliersView.selectedSupplier.supplierAfm}" required="true" style="width:500px" requiredMessage="Δεν συμπληρώσατε ΑΦΜ."/>
+				 	<p:message for="afm"/>
+				 	
+	                <h:outputText value="ΔΟΥ:" />
+	                <h:inputText id="doy" value="#{dtSuppliersView.selectedSupplier.supplierDoy}" required="true" style="width:500px" requiredMessage="Δεν συμπληρώσατε ΔΟΥ."/>
+				 	<p:message for="doy"/>
+				 	
+	                <h:outputText value="Διεύθυνση:" />
+	                <h:inputText id="address" value="#{dtSuppliersView.selectedSupplier.supplierAddress}" required="true" style="width:500px" requiredMessage="Δεν συμπληρώσατε διεύθυνση."/>
+	                <p:message for="address"/>
+	            </h:panelGrid>
+                <p:commandButton value="Save" id="update" validateClient="true" process="supplierUpdateForm" update="supplierDetail,:form:suppliersTable" actionListener="#{dtSuppliersView.saveSupplier()}" icon="ui-icon-disk" oncomplete="if (args &amp;&amp; !args.validationFailed) { PF('supplierDialog').hide(); }"/>
+	            <p:commandButton value="Cancel" onclick="PF('supplierDialog').hide()"/>
+                
+			</h:form>
+	    </p:dialog>
+	    
+	    <p:dialog header="Add New Supplier" widgetVar="newSupplierDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false" dynamic="true">
+	    	<h:form id="supplierCreateForm">
+	    		<p:messages  showDetails="false"/>
+	    		<h:panelGrid id="newSupplierDetail"  columns="3" rendered="#{not empty dtSuppliersView.selectedSupplier}" columnClasses="label,value">
+	                <h:outputText value="Επωνυμία:" />
+	                <h:inputText id="name" value="#{dtSuppliersView.selectedSupplier.supplierName}" style="width: 500px" title="Επωνυμία" required="true" requiredMessage="Δεν συμπληρώσατε επωνυμία."/>
+					<p:message for="name"/>
+					
+	                <h:outputText value="Επάγγελμα:" />
+	                <h:inputText id="busDesc" value="#{dtSuppliersView.selectedSupplier.supplierBusDesc}" required="true" style="width: 500px" requiredMessage="Δεν συμπληρώσατε δραστηριότητα."/>
+					<p:message for="busDesc"/>
+					
+				    <h:outputText value="Τηλέφωνο:" />
+	                <h:inputText id="phone" value="#{dtSuppliersView.selectedSupplier.supplierPhone}" required="true" style="width:500px"  requiredMessage="Δεν συμπληρώσατε τηλέφωνο."/>
+				 	<p:message for="phone"/>
+				 	
+	                <h:outputText value="ΑΦΜ:" />
+	                <h:inputText id="afm" value="#{dtSuppliersView.selectedSupplier.supplierAfm}" required="true" style="width:500px" requiredMessage="Δεν συμπληρώσατε ΑΦΜ."/>
+				 	<p:message for="afm"/>
+				 	
+	                <h:outputText value="ΔΟΥ:" />
+	                <h:inputText id="doy" value="#{dtSuppliersView.selectedSupplier.supplierDoy}" required="true" style="width:500px" requiredMessage="Δεν συμπληρώσατε ΔΟΥ."/>
+				 	<p:message for="doy"/>
+				 	
+	                <h:outputText value="Διεύθυνση:" />
+	                <h:inputText id="address" value="#{dtSuppliersView.selectedSupplier.supplierAddress}" required="true" style="width:500px" requiredMessage="Δεν συμπληρώσατε διεύθυνση."/>
+	                <p:message for="address"/>
+	            </h:panelGrid>
+	            <p:commandButton value="Save" id="create" validateClient="true" update="newSupplierDetail :form:suppliersTable" actionListener="#{dtSuppliersView.saveSupplier()}" icon="ui-icon-disk" oncomplete="if (args &amp;&amp; !args.validationFailed) { PF('newSupplierDialog').hide(); }"/>
+	            <p:commandButton value="Cancel" onclick="PF('newSupplierDialog').hide()"/>
+               </h:form>
+	    </p:dialog>
+	</h:body>
+</f:view>

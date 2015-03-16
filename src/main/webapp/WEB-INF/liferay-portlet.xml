@@ -31,7 +31,32 @@
 		<footer-portlet-javascript>
 			/js/main.js
 		</footer-portlet-javascript>
-		<css-class-wrapper>company-portlet</css-class-wrapper>
+		<footer-portlet-javascript>/js/jsfcrud.js</footer-portlet-javascript>
+		<css-class-wrapper>customers-portlet</css-class-wrapper>
+		<add-default-resource>true</add-default-resource> 
+	</portlet>
+	<portlet>
+		<portlet-name>suppliers</portlet-name>
+		<icon>/icon.png</icon>
+		<requires-namespaced-parameters>false</requires-namespaced-parameters>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jsfcrud.js</footer-portlet-javascript>
+		<css-class-wrapper>suppliers-portlet</css-class-wrapper>
+		<add-default-resource>true</add-default-resource> 
+	</portlet>
+	<portlet>
+		<portlet-name>invoices</portlet-name>
+		<icon>/icon.png</icon>
+		<requires-namespaced-parameters>false</requires-namespaced-parameters>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jsfcrud.js</footer-portlet-javascript>
+		<css-class-wrapper>invoices-portlet</css-class-wrapper>
 		<add-default-resource>true</add-default-resource> 
 	</portlet>
 	<role-mapper>
