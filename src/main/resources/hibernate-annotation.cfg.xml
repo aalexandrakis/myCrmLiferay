@@ -17,9 +17,9 @@
         
         <!-- Mapping with model class containing annotations -->
         <mapping class="com.aalexandrakis.mycrmliferay.models.CompanyInfo"/>
+        <mapping class="com.aalexandrakis.mycrmliferay.models.Customer"/>
         <!-- <mapping class="com.aalexandrakis.mycrm.models.User"/>
         <mapping class="com.aalexandrakis.mycrm.models.Role"/>
-        <mapping class="com.aalexandrakis.mycrm.models.Customer"/>
         <mapping class="com.aalexandrakis.mycrm.models.Supplier"/>
         <mapping class="com.aalexandrakis.mycrm.models.Invoice"/>
         <mapping class="com.aalexandrakis.mycrm.models.InvoiceLine"/>

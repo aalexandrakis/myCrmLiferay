@@ -6,5 +6,6 @@
 	<category name="Alexandrakis Portlets">
 		<portlet id="companies"></portlet>
 		<portlet id="company"></portlet>
+		<portlet id="customers"></portlet>
 	</category>
 </display>
