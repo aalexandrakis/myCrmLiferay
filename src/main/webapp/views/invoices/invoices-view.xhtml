@@ -30,13 +30,13 @@
 			        <p:column headerText="Πελάτης">
 			            <h:outputText value="#{invoice.customer.customerName}" />
 			        </p:column>
-			        <p:column headerText="Ποσό">
+			        <p:column headerText="Ποσό" footerText="#{dtInvoicesView.sumAmount}" style="text-align:right">
 			            <h:outputText value="#{invoice.amount}" />
 			        </p:column>
-			        <p:column headerText="ΦΠΑ">
-			            <h:outputText value="#{invoice.fpa}" />
+			        <p:column headerText="ΦΠΑ" footerText="#{dtInvoicesView.sumFpa}" style="text-align:right">
+			            <h:outputText value="#{invoice.fpaAmount}" />
 			        </p:column>
-			        <p:column headerText="Σύνολο">
+			        <p:column headerText="Σύνολο" footerText="#{dtInvoicesView.sumGross}" style="text-align:right">
 			            <h:outputText value="#{invoice.gross}" />
 			        </p:column>
 			        <!-- <f:facet name="footer">

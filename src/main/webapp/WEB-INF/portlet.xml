@@ -171,4 +171,38 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	
+	<portlet>
+		<portlet-name>selectCompany</portlet-name>
+		<display-name>Selecte Company</display-name>
+		<portlet-class>
+			javax.portlet.faces.GenericFacesPortlet
+		</portlet-class>
+		<init-param>
+			<name>javax.portlet.faces.defaultViewId.view</name>
+			<value>/views/selectCompany/select-company.xhtml</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<portlet-info>
+			<title>Select Company</title>
+			<short-title>Select Company</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
 </portlet-app>

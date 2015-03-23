@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+
+<f:view
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+>
+	<h:head />
+        
+	<h:body>
+		<h:form id="form">      
+		    <p:panel id="panel" header="Εταιρεία" style="margin-bottom:10px;">
+		        <p:messages id="messages" />
+		 
+		        <div class="ui-grid ui-grid-responsive" >
+		            <p:inputText id="companyId" value="#{dtSelectCompanyView.filterCompanyId}" label="Κωδικός" placeholder="Κωδικός"  >
+		            </p:inputText>
+		            
+		            <p:inputText id="companyName" value="#{dtSelectCompanyView.filterName}" label="Επωνυμία" placeholder="Επωνυμία">
+		            </p:inputText>
+		 			
+		            <p:inputText id="companyAfm" value="#{dtSelectCompanyView.filterAfm}" label="Α.Φ.Μ." placeholder="Α.Φ.Μ." >
+		            </p:inputText>
+		 			
+		 			<p:commandButton value="Αναζήτηση" id="search" icon="ui-icon-extlink" update=":selectCompanyDialogForm:selectCompanyDT" 
+		 					actionListener="#{dtSelectCompanyView.selectCompany}"
+		 					oncomplete="PF('selectCompanyDialog').show()">
+		 			</p:commandButton>
+		 			
+		        </div>
+  		        <div class="ui-grid ui-grid-responsive" >
+  		        	<div class="ui-grid-row">
+  		        		<div class="ui-grid-col-2">
+  		        			<p:outputLabel value="Κωδικός:"/>
+  		        		</div>
+  		        		<div class="ui-grid-col-1">
+			            	<p:outputLabel value="#{dtSelectCompanyView.company.companyId}"/>
+			            </div>
+  		        		<div class="ui-grid-col-3">
+  		        			<p:outputLabel value="Επωνυμία:"/>
+  		        		</div>
+  		        		<div class="ui-grid-col-9">
+				            <p:outputLabel value="#{dtSelectCompanyView.company.name}"/>
+						</div>		         
+					</div>
+					<div class="ui-grid-row">   
+  		        		<div class="ui-grid-col-2">
+  		        			<p:outputLabel value="Α.Φ.Μ.:"/>
+  		        		</div>
+  		        		<div class="ui-grid-col-2">
+				            <p:outputLabel value="#{dtSelectCompanyView.company.afm}"/>
+						</div>
+  		        		<div class="ui-grid-col-2">
+  		        			<p:outputLabel value="ΔΟΥ:"/>
+  		        		</div>
+  		        		<div class="ui-grid-col-6">
+							<p:outputLabel value="#{dtSelectCompanyView.company.doy}"/>
+						</div>
+					</div>
+					<div class="ui-grid-row">	
+  		        		<div class="ui-grid-col-3">
+  		        			<p:outputLabel value="Δραστηριότητα:"/>
+  		        		</div>
+  		        		<div class="ui-grid-col-9">
+							<p:outputLabel value="#{dtSelectCompanyView.company.busDesc}"/>
+			    		</div>        		 
+		    		</div>
+		    		<div class="ui-grid-row">			
+  		        		<div class="ui-grid-col-2">
+  		        			<p:outputLabel value="Τηλέφωνο:"/>
+  		        		</div>
+  		        		<div class="ui-grid-col-2">
+							<p:outputLabel value="#{dtSelectCompanyView.company.workPhone}"/>
+						</div>
+  		        		<div class="ui-grid-col-2">
+  		        			<p:outputLabel value="Κινητό:"/>
+  		        		</div>
+  		        		<div class="ui-grid-col-2">
+							<p:outputLabel value="#{dtSelectCompanyView.company.mobilePhone}"/>
+						</div>
+					</div>
+					<div class="ui-grid-row">
+  		        		<div class="ui-grid-col-2">
+  		        			<p:outputLabel value="Email:"/>
+  		        		</div>
+  		        		<div class="ui-grid-col-8">
+							<p:outputLabel value="#{dtSelectCompanyView.company.email}"/>
+						</div>
+					</div>
+		        </div>
+		    </p:panel>
+    	</h:form>
+		
+		<p:dialog header="Select Company" widgetVar="selectCompanyDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+			<h:form id="selectCompanyDialogForm">
+		        <p:outputPanel id="selectCompanyDetail" style="text-align:center;">
+		            <p:dataTable id="selectCompanyDT" var="company" value="#{dtSelectCompanyView.companies}">
+						<p:column style="width:32px;text-align: center">
+				             <p:commandButton update=":form" oncomplete="PF('selectCompanyDialog').hide()" icon="ui-icon-search" title="Select">
+				                <f:setPropertyActionListener value="#{company}" target="#{dtSelectCompanyView.company}" />
+				            </p:commandButton>
+				        </p:column>
+				        <p:column headerText="Κωδικός">
+				            <h:outputText value="#{company.companyId}" />
+				        </p:column>
+				        <p:column headerText="Επωνυμία">
+				            <h:outputText value="#{company.name}" />
+				        </p:column>
+				        <p:column headerText="Α.Φ.Μ">
+				            <h:outputText value="#{company.afm}" />
+				        </p:column>
+				        <p:column headerText="Δραστηριότητα">
+				            <h:outputText value="#{company.busDesc}" />
+				        </p:column>
+				    </p:dataTable>
+		        </p:outputPanel>
+	        </h:form>
+    	</p:dialog>
+	</h:body>
+</f:view>
