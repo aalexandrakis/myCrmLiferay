@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+
+<f:view
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+>
+	<h:head />
+        
+	<h:body>
+		<h:form id="form" >
+		 	   <p:growl id="msgs" showDetail="true" />
+		 		<p:commandButton value="Προσθήκη γραμμής" id="newLine" update="invoiceLinesTable" actionListener="#{dtInvoiceView.invoice.addNewLine}" icon="ui-icon-plus"/>
+				<p:dataTable id="invoiceLinesTable" var="invoiceLine" value="#{dtInvoiceView.invoice.invoiceDetailsCollection }" rowKey="#{invoiceLine.lineId}">
+			        <p:column headerText = "Διαγραφή" style="width:5%">  
+			            <p:commandButton update="invoiceLinesTable" actionListener="#{dtInvoiceView.invoice.removeLine(invoiceLine.lineId)}"  
+			                    image="ui-icon ui-icon-circle-close">  
+			            </p:commandButton>  
+			        </p:column> 
+			        <p:column headerText="Γραμμή" style="width:5%">
+			            <h:outputText value="#{invoiceLine.lineId}" />
+			        </p:column>
+			        <p:column headerText="Περιγραφή" style="width:70%">
+			            <h:inputText value="#{invoiceLine.description}" style="width:90%"/>
+			        </p:column>
+			        <p:column headerText="Ποσό">
+			            <h:inputText value="#{invoiceLine.net}" />
+			        </p:column>
+			    </p:dataTable>
+	    </h:form>
+	</h:body>
+</f:view>

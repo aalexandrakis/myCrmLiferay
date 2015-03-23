@@ -8,6 +8,7 @@ package com.aalexandrakis.mycrmliferay.models;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Blob;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -282,6 +283,29 @@ public class InvoiceHeader implements Serializable {
 		this.customer = customer;
 	}
 
+	public void addNewLine(){
+		InvoiceDetails invoiceLine = new InvoiceDetails();
+		if (invoiceDetailsCollection == null){
+			invoiceDetailsCollection = new ArrayList<InvoiceDetails>();
+		}
+		invoiceLine.setLineId(invoiceDetailsCollection.size()+1);
+		this.invoiceDetailsCollection.add(invoiceLine);
+	}
+	
+	public void removeLine(Integer lineId){
+		for (InvoiceDetails invoiceLine : invoiceDetailsCollection){
+			if (invoiceLine.getLineId() == lineId){
+				invoiceDetailsCollection.remove(invoiceLine);
+				break;
+			}
+		}
+		lineId = 0;
+		for (InvoiceDetails invoiceLine : invoiceDetailsCollection){
+			lineId++;
+			invoiceLine.setLineId(lineId);
+		}
+	}
+	
 	@Override
     public int hashCode() {
         int hash = 0;

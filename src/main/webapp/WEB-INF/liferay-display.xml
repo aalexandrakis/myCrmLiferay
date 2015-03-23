@@ -11,5 +11,6 @@
 		<portlet id="invoices"></portlet>
 		<portlet id="selectCompany"></portlet>
 		<portlet id="selectCustomer"></portlet>
+		<portlet id="invoice"></portlet>
 	</category>
 </display>

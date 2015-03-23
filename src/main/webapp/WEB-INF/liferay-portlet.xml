@@ -78,6 +78,17 @@
 		<css-class-wrapper>selectCustomer-portlet</css-class-wrapper>
 		<add-default-resource>true</add-default-resource> 
 	</portlet>
+	<portlet>
+		<portlet-name>invoice</portlet-name>
+		<icon>/icon.png</icon>
+		<requires-namespaced-parameters>false</requires-namespaced-parameters>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>invoice-portlet</css-class-wrapper>
+		<add-default-resource>true</add-default-resource> 
+	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>
