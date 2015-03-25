@@ -59,8 +59,8 @@ import javax.xml.bind.annotation.XmlTransient;
 public class InvoiceHeader implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @Basic(optional = false)
     @Column(name = "invoiceId")
     private Integer invoiceId;
     @Basic(optional = false)
@@ -107,7 +107,7 @@ public class InvoiceHeader implements Serializable {
     @Lob
     @Column(name = "invoiceFile")
     private Blob invoiceFile;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "invoiceId")
+    @OneToMany(mappedBy = "invoiceId")
     private Collection<InvoiceDetails> invoiceDetailsCollection;
 
     @Transient
@@ -310,6 +310,7 @@ public class InvoiceHeader implements Serializable {
 	}
 	
 	public void calculate(){
+		this.taxis = BigDecimal.ZERO;
 		this.amount = BigDecimal.ZERO;
 		this.fpaAmount = BigDecimal.ZERO;
 		this.gross = BigDecimal.ZERO;

@@ -3,6 +3,7 @@ package com.aalexandrakis.mycrmliferay.beans;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
@@ -22,6 +23,17 @@ public class SelectCompanyView implements Serializable {
 	private String filterAfm;
 	private List<CompanyInfo> companies;
 	
+	@PostConstruct
+	public void init(){
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+        ExternalContext externalContext = facesContext.getExternalContext();
+        PortletRequest portletRequest = (PortletRequest) externalContext.getRequest();
+        PortletSession portletSession = portletRequest.getPortletSession();
+        if (portletSession.getAttribute("companyId", PortletSession.APPLICATION_SCOPE) != null){
+        	portletSession.removeAttribute("companyId", PortletSession.APPLICATION_SCOPE);
+        }
+	}
+
 	public Integer getFilterCompanyId() {
 		return filterCompanyId;
 	}
