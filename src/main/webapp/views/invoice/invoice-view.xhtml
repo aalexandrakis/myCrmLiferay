@@ -13,7 +13,31 @@
 	<h:body>
 		<h:form id="form" >
 		 	   <p:growl id="msgs" showDetail="true" />
+		 	   <div class="ui-grid ui-grid-responsive" >
+  		        	<div class="ui-grid-row">
+  		        		<div class="ui-grid-col-1">
+  		        			<p:outputLabel for="invoiceDate" value="Ημερομηνία:" style="font-weight:bold"/>
+  		        		</div>
+  		        		<div class="ui-grid-col-4">
+  		        			<p:calendar id="invoiceDate" value="#{dtInvoiceView.invoice.invoiceDate}" pattern="dd-MM-yyyy" mask="true"  showOn="button" />
+  		        		</div>
+  		        		<div class="ui-grid-col-1">
+  		        			<p:outputLabel for="fpa" value="Φ.Π.Α:" style="font-weight:bold"/>
+  		        		</div>
+  		        		<div class="ui-grid-col-4">
+  		        			<p:spinner id="fpa" value="#{dtInvoiceView.invoice.fpa}" stepFactor="0.01"/>
+  		        		</div>
+  		        		<div class="ui-grid-col-2">
+  		        			<p:outputLabel for="fpa" value="Παρακράτηση:" style="font-weight:bold"/>
+  		        		</div>
+  		        		<div class="ui-grid-col-4">
+  		        			<p:spinner id="withHolding" value="#{dtInvoiceView.invoice.withHolding}" stepFactor="0.01" />
+  		        		</div>
+	        		</div>
+        		</div>
 		 		<p:commandButton value="Προσθήκη γραμμής" id="newLine" update="invoiceLinesTable" actionListener="#{dtInvoiceView.invoice.addNewLine}" icon="ui-icon-plus"/>
+				<p:commandButton value="Υπολογισμός" id="calculate" update=":form" actionListener="#{dtInvoiceView.invoice.calculate}" icon="ui-icon-calculator"/>
+				<p:commandButton value="Αποθήκευση" id="save" update=":form" actionListener="#{dtInvoiceView.save}" icon="ui-icon-disk"/>
 				<p:dataTable id="invoiceLinesTable" var="invoiceLine" value="#{dtInvoiceView.invoice.invoiceDetailsCollection }" rowKey="#{invoiceLine.lineId}">
 			        <p:column headerText = "Διαγραφή" style="width:5%">  
 			            <p:commandButton update="invoiceLinesTable" actionListener="#{dtInvoiceView.invoice.removeLine(invoiceLine.lineId)}"  
@@ -26,10 +50,27 @@
 			        <p:column headerText="Περιγραφή" style="width:70%">
 			            <h:inputText value="#{invoiceLine.description}" style="width:90%"/>
 			        </p:column>
-			        <p:column headerText="Ποσό">
-			            <h:inputText value="#{invoiceLine.net}" />
+			        <p:column headerText="Ποσό" >
+			            <h:inputText value="#{invoiceLine.net}"  style="text-align:right"/>
 			        </p:column>
 			    </p:dataTable>
+			    <table style="border:1px solid black;width:100%" >
+		    	    <tr>
+			    	    <td style="width:70%"></td>
+			    	    <td style="width:10%;text-align:right;font-weight:bold">Καθαρό</td>
+			    	    <td><p:outputLabel value="#{dtInvoiceView.invoice.amount}" style="text-align:right"/></td>
+		    	    </tr>
+		    	    <tr>
+			    	    <td style="width:70%"><p:outputLabel value="#{dtInvoiceView.invoice.withHoldingString}" style="text-align:left"/></td>
+			    	    <td style="width:10%;text-align:right;font-weight:bold">Φ.Π.Α</td>
+			    	    <td><p:outputLabel value="#{dtInvoiceView.invoice.fpaAmount}"  style="text-align:right"/></td>
+		    	    </tr>  
+		    	    <tr>
+			    	    <td style="width:70%"></td>
+			    	    <td style="width:10%;text-align:right;font-weight:bold">Σύνολο</td>
+			    	    <td><p:outputLabel value="#{dtInvoiceView.invoice.gross}"  style="text-align:right"/></td>
+		    	    </tr>  
+			    </table>
 	    </h:form>
 	</h:body>
 </f:view>

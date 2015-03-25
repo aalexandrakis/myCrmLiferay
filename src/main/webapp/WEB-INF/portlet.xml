@@ -174,7 +174,7 @@
 	
 	<portlet>
 		<portlet-name>selectCompany</portlet-name>
-		<display-name>Selecte Company</display-name>
+		<display-name>Select Company</display-name>
 		<portlet-class>
 			javax.portlet.faces.GenericFacesPortlet
 		</portlet-class>
@@ -207,7 +207,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>selectCustomer</portlet-name>
-		<display-name>Selecte Customer</display-name>
+		<display-name>Select Customer</display-name>
 		<portlet-class>
 			javax.portlet.faces.GenericFacesPortlet
 		</portlet-class>
@@ -271,4 +271,5 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+    
 </portlet-app>

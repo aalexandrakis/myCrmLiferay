@@ -1,19 +1,17 @@
 package com.aalexandrakis.mycrmliferay.beans;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-
-import org.primefaces.context.RequestContext;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import javax.portlet.PortletRequest;
+import javax.portlet.PortletSession;
 
 import com.aalexandrakis.mycrmliferay.daoimpl.CompanyInfoDaoImpl;
-import com.aalexandrakis.mycrmliferay.daoimpl.InvoiceDaoImpl;
 import com.aalexandrakis.mycrmliferay.models.CompanyInfo;
-import com.aalexandrakis.mycrmliferay.models.InvoiceHeader;
 
 @ManagedBean(name="dtSelectCompanyView")
 @ViewScoped
@@ -66,6 +64,11 @@ public class SelectCompanyView implements Serializable {
 	
 	public void selectCompanyFromDialog(CompanyInfo company){
 		this.company = company;
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+        ExternalContext externalContext = facesContext.getExternalContext();
+        PortletRequest portletRequest = (PortletRequest) externalContext.getRequest();
+        PortletSession portletSession = portletRequest.getPortletSession();
+	    portletSession.setAttribute("companyId", company.getCompanyId().toString() ,PortletSession.APPLICATION_SCOPE);
 	}
 				
 	public void selectCompany(){

@@ -5,6 +5,10 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import javax.portlet.PortletRequest;
+import javax.portlet.PortletSession;
 
 import com.aalexandrakis.mycrmliferay.daoimpl.CustomerDaoImpl;
 import com.aalexandrakis.mycrmliferay.models.Customer;
@@ -58,8 +62,13 @@ public class SelectCustomerView implements Serializable {
 		this.customers = customers;
 	}
 	
-	public void selectCompanyFromDialog(Customer customer){
+	public void selectCustomerFromDialog(Customer customer){
 		this.customer = customer;
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+        ExternalContext externalContext = facesContext.getExternalContext();
+        PortletRequest portletRequest = (PortletRequest) externalContext.getRequest();
+        PortletSession portletSession = portletRequest.getPortletSession();
+	    portletSession.setAttribute("customerId", customer.getCustomerId().toString() ,PortletSession.APPLICATION_SCOPE);
 	}
 				
 	public void selectCustomer(){
