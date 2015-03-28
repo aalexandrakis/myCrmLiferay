@@ -29,6 +29,9 @@
 		 					actionListener="#{dtSelectCompanyView.selectCompany}"
 		 					oncomplete="PF('selectCompanyDialog').show()">
 		 			</p:commandButton>
+		 			<p:commandButton value="Καθαρισμός" id="clear" icon="ui-icon-extlink" update=":form" 
+		 					actionListener="#{dtSelectCompanyView.clearSelection}">
+		 			</p:commandButton>
 		 			
 		        </div>
   		        <div class="ui-grid ui-grid-responsive" >

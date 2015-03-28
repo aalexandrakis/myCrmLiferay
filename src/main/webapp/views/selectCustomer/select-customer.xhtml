@@ -30,6 +30,9 @@
 		 					oncomplete="PF('selectCustomerDialog').show()">
 		 			</p:commandButton>
 		 			
+		 			<p:commandButton value="Καθαρισμός" id="clear" icon="ui-icon-extlink" update=":form" 
+		 					actionListener="#{dtSelectCustomerView.clearSelection}">
+		 			</p:commandButton>
 		        </div>
   		        <div class="ui-grid ui-grid-responsive" >
   		        	<div class="ui-grid-row">

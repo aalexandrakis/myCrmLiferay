@@ -91,4 +91,16 @@ public class SelectCompanyView implements Serializable {
 			e.printStackTrace();
 		}
 	}
+	
+	public void clearSelection(){
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+        ExternalContext externalContext = facesContext.getExternalContext();
+        PortletRequest portletRequest = (PortletRequest) externalContext.getRequest();
+        PortletSession portletSession = portletRequest.getPortletSession();
+        if (portletSession.getAttribute("companyId", PortletSession.APPLICATION_SCOPE) != null){
+        	portletSession.removeAttribute("companyId", PortletSession.APPLICATION_SCOPE);
+        }
+        company = null;
+
+	}
 }
