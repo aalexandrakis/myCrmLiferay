@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+
+<f:view
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:portlet="http://java.sun.com/portlet_2_0"
+>
+	<h:head />
+	<h:body>
+		<h:form id="form" >
+		 	   <p:growl id="msgs" showDetail="true" />
+		 	   <div class="ui-grid ui-grid-responsive" >
+  		        	<div class="ui-grid-row">
+  		        		<div class="ui-grid-col-1">
+  		        			<p:outputLabel for="dateFrom" value="Ημερομηνία Από:" style="font-weight:bold"/>
+  		        		</div>
+  		        		<div class="ui-grid-col-4">
+  		        			<p:calendar id="dateFrom" value="#{dtOutcomesView.dateFrom}" pattern="dd-MM-yyyy" mask="true"  showOn="button" />
+  		        		</div>
+  		        		<div class="ui-grid-col-1">
+  		        			<p:outputLabel for="dateTo" value="Έως:" style="font-weight:bold"/>
+  		        		</div>
+  		        		<div class="ui-grid-col-4">
+  		        			<p:calendar id="dateTo" value="#{dtOutcomesView.dateTo}" pattern="dd-MM-yyyy" mask="true"  showOn="button" />
+  		        		</div>
+	        		</div>
+	        		<div class="ui-grid-row">
+  		        		<div class="ui-grid-col-1">
+  		        			<p:commandButton value="Αναζήτηση" id="search" icon="ui-icon-extlink" update=":form:outcomesTable" 
+			 					actionListener="#{dtOutcomesView.searchOutcomes()}">
+		 					</p:commandButton>
+  		        		</div>
+  		        		<div class="ui-grid-col-1">
+	   		         		<portlet:resourceURL var="printOutcomesResourceUrl" id="printOutcomeList">
+								<portlet:param name="dateFrom" value="#{dtOutcomesView.dateFromToString}" />
+								<portlet:param name="dateTo" value="#{dtOutcomesView.dateToToString}" />
+							</portlet:resourceURL>        
+				        	<a href="#{printOutcomesResourceUrl}" class="ui-priority-primary">
+				        		<h:outputText value="Print List" />
+							</a>
+  		        		</div>
+  		        		<div class="ui-grid-col-1">
+	   		         		<portlet:resourceURL var="downloadFilesResourceUrl" id="downloadFiles">
+								<portlet:param name="dateFrom" value="#{dtOutcomesView.dateFromToString}" />
+								<portlet:param name="dateTo" value="#{dtOutcomesView.dateToToString}" />
+							</portlet:resourceURL>        
+				        	<a href="#{downloadFilesResourceUrl}" class="ui-priority-primary">
+				        		<h:outputText value="Download Files" />
+							</a>
+  		        		</div>
+	        		</div>
+        		</div>
+		 	   	
+				<p:dataTable id="outcomesTable" var="outcome" value="#{dtOutcomesView.outcomes }" >
+			        <!-- <f:facet name="header">
+			            Customers List
+			        </f:facet> -->
+			        <!-- <p:column selectionMode="single" style="width:16px;text-align:center"/>-->
+			        <p:column headerText="Αριθμός" style="text-align:center;width:5%">
+   		         		<portlet:resourceURL var="resourceUrl" id="outcomeResource">
+								<portlet:param name="fileID" value="#{outcome.outcomeId.toString()}" />
+						</portlet:resourceURL>        
+			        	<a href="#{resourceUrl}">
+			        		<h:outputText value="#{outcome.outcomeId}" />
+						</a>
+			        </p:column>
+			        <p:column headerText="Ημερομηνία" style="text-align:center;width:10%">
+			            <h:outputText value="#{outcome.outcomeDate}" />
+			        </p:column>
+			        <p:column headerText="Εταιρεία">
+			            <h:outputText value="#{outcome.companyInfo.name}" />
+			        </p:column>
+			        <p:column headerText="Πελάτης">
+			            <h:outputText value="#{outcome.supplier.supplierName}" />
+			        </p:column>
+			        <p:column headerText="Ποσό" footerText="#{dtOutcomesView.sumAmount}" style="text-align:right;width:10%">
+			            <h:outputText value="#{outcome.amount}" />
+			        </p:column>
+			        <p:column headerText="ΦΠΑ" footerText="#{dtOutcomesView.sumFpa}" style="text-align:right;width:10%">
+			            <h:outputText value="#{outcome.fpaAmount}" />
+			        </p:column>
+			        <p:column headerText="Σύνολο" footerText="#{dtOutcomesView.sumGross}" style="text-align:right;width:10%">
+			            <h:outputText value="#{outcome.gross}" />
+			        </p:column>
+			        <!-- <f:facet name="footer">
+			            <p:commandButton process="radioDT" update=":form:customersDetail" icon="ui-icon-edit" value="Edit" oncomplete="PF('customersDialog').show()" />
+			        </f:facet> -->
+			    </p:dataTable>
+	    </h:form>
+	    <p:dialog header="PDF" widgetVar="pdfDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false" dynamic="true">
+	    	<h:form id="pdfForm" enctype="multipart/form-data">
+			</h:form>
+	    </p:dialog>
+	</h:body>
+</f:view>

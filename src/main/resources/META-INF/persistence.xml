@@ -3,6 +3,9 @@
   <persistence-unit name="com.example.plugins_myCrmLiferay_war_1.0.0-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>com.aalexandrakis.mycrmliferay.models.Supplier</class>
+    <class>com.aalexandrakis.mycrmliferay.models.OutcomeDetail</class>
+    <class>com.aalexandrakis.mycrmliferay.models.OutcomeHeader</class>
+    <class>com.aalexandrakis.mycrmliferay.models.Payment</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/myCrmTest"/>

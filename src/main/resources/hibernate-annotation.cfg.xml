@@ -21,11 +21,11 @@
         <mapping class="com.aalexandrakis.mycrmliferay.models.Supplier"/>
         <mapping class="com.aalexandrakis.mycrmliferay.models.InvoiceHeader"/>
         <mapping class="com.aalexandrakis.mycrmliferay.models.InvoiceDetails"/>
+        <mapping class="com.aalexandrakis.mycrmliferay.models.OutcomeHeader"/>
+        <mapping class="com.aalexandrakis.mycrmliferay.models.OutcomeDetail"/>
         
         <!-- <mapping class="com.aalexandrakis.mycrm.models.User"/>
-        <mapping class="com.aalexandrakis.mycrm.models.Role"/>
-        <mapping class="com.aalexandrakis.mycrm.models.Outcome"/>
-        <mapping class="com.aalexandrakis.mycrm.models.OutcomeLine"/> -->
+        <mapping class="com.aalexandrakis.mycrm.models.Role"/> -->
         
     </session-factory>
 </hibernate-configuration>

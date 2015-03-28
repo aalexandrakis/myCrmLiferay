@@ -169,6 +169,37 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	<portlet>
+		<portlet-name>outcomes</portlet-name>
+		<display-name>Outcomes</display-name>
+		<portlet-class>com.aalexandrakis.mycrmliferay.portlets.OutcomesPortlet</portlet-class>
+		<init-param>
+			<name>javax.portlet.faces.defaultViewId.view</name>
+			<value>/views/outcomes/outcomes-view.xhtml</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<portlet-info>
+			<title>Outcomes</title>
+			<short-title>Outcomes</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
 	
 	<portlet>
 		<portlet-name>selectCompany</portlet-name>
@@ -221,6 +252,39 @@
 		<portlet-info>
 			<title>Select Customer</title>
 			<short-title>Select Customer</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	<portlet>
+		<portlet-name>selectSupplier</portlet-name>
+		<display-name>Select Supplier</display-name>
+		<portlet-class>
+			javax.portlet.faces.GenericFacesPortlet
+		</portlet-class>
+		<init-param>
+			<name>javax.portlet.faces.defaultViewId.view</name>
+			<value>/views/selectSupplier/select-supplier.xhtml</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<portlet-info>
+			<title>Select Supplier</title>
+			<short-title>Select Supplier</short-title>
 			<keywords></keywords>
 		</portlet-info>
 		<security-role-ref>

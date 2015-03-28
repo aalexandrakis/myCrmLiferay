@@ -58,6 +58,18 @@
 		<add-default-resource>true</add-default-resource> 
 	</portlet>
 	<portlet>
+		<portlet-name>outcomes</portlet-name>
+		<icon>/icon.png</icon>
+		<private-session-attributes>false</private-session-attributes>
+		<requires-namespaced-parameters>false</requires-namespaced-parameters>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>outcomes-portlet</css-class-wrapper>
+		<add-default-resource>true</add-default-resource> 
+	</portlet>
+	<portlet>
 		<portlet-name>selectCompany</portlet-name>
 		<icon>/icon.png</icon>
 		<private-session-attributes>false</private-session-attributes>
@@ -79,6 +91,18 @@
 			/js/main.js
 		</footer-portlet-javascript>
 		<css-class-wrapper>selectCustomer-portlet</css-class-wrapper>
+		<add-default-resource>true</add-default-resource> 
+	</portlet>
+	<portlet>
+		<portlet-name>selectSupplier</portlet-name>
+		<icon>/icon.png</icon>
+		<private-session-attributes>false</private-session-attributes>
+		<requires-namespaced-parameters>false</requires-namespaced-parameters>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>selectSupplier-portlet</css-class-wrapper>
 		<add-default-resource>true</add-default-resource> 
 	</portlet>
 	<portlet>

@@ -9,8 +9,10 @@
 		<portlet id="customers"></portlet>
 		<portlet id="suppliers"></portlet>
 		<portlet id="invoices"></portlet>
+		<portlet id="outcomes"></portlet>
 		<portlet id="selectCompany"></portlet>
 		<portlet id="selectCustomer"></portlet>
+		<portlet id="selectSupplier"></portlet>
 		<portlet id="invoice"></portlet>
 	</category>
 </display>
