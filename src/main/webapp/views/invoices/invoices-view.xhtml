@@ -7,9 +7,9 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:portlet="http://java.sun.com/portlet_2_0"
 >
 	<h:head />
-        
 	<h:body>
 		<h:form id="form" >
 		 	   <p:growl id="msgs" showDetail="true" />
@@ -18,10 +18,15 @@
 			            Customers List
 			        </f:facet> -->
 			        <!-- <p:column selectionMode="single" style="width:16px;text-align:center"/>-->
-			        <p:column headerText="Αριθμός">
-			            <h:outputText value="#{invoice.invoiceId}" />
+			        <p:column headerText="Αριθμός" style="text-align:center;width:5%">
+   		         		<portlet:resourceURL var="resourceUrl" id="invoiceResource">
+								<portlet:param name="fileID" value="#{invoice.invoiceId.toString()}" />
+						</portlet:resourceURL>        
+			        	<a href="#{resourceUrl}">
+			        		<h:outputText value="#{invoice.invoiceId}" />
+						</a>
 			        </p:column>
-			        <p:column headerText="Ημερομηνία">
+			        <p:column headerText="Ημερομηνία" style="text-align:center;width:10%">
 			            <h:outputText value="#{invoice.invoiceDate}" />
 			        </p:column>
 			        <p:column headerText="Εταιρεία">
@@ -30,13 +35,13 @@
 			        <p:column headerText="Πελάτης">
 			            <h:outputText value="#{invoice.customer.customerName}" />
 			        </p:column>
-			        <p:column headerText="Ποσό" footerText="#{dtInvoicesView.sumAmount}" style="text-align:right">
+			        <p:column headerText="Ποσό" footerText="#{dtInvoicesView.sumAmount}" style="text-align:right;width:10%">
 			            <h:outputText value="#{invoice.amount}" />
 			        </p:column>
-			        <p:column headerText="ΦΠΑ" footerText="#{dtInvoicesView.sumFpa}" style="text-align:right">
+			        <p:column headerText="ΦΠΑ" footerText="#{dtInvoicesView.sumFpa}" style="text-align:right;width:10%">
 			            <h:outputText value="#{invoice.fpaAmount}" />
 			        </p:column>
-			        <p:column headerText="Σύνολο" footerText="#{dtInvoicesView.sumGross}" style="text-align:right">
+			        <p:column headerText="Σύνολο" footerText="#{dtInvoicesView.sumGross}" style="text-align:right;width:10%">
 			            <h:outputText value="#{invoice.gross}" />
 			        </p:column>
 			        <!-- <f:facet name="footer">
@@ -44,5 +49,9 @@
 			        </f:facet> -->
 			    </p:dataTable>
 	    </h:form>
+	    <p:dialog header="PDF" widgetVar="pdfDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false" dynamic="true">
+	    	<h:form id="pdfForm" enctype="multipart/form-data">
+			</h:form>
+	    </p:dialog>
 	</h:body>
 </f:view>

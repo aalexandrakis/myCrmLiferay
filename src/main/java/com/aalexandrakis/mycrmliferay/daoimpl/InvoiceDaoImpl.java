@@ -13,8 +13,9 @@ import org.hibernate.SessionFactory;
 
 import com.aalexandrakis.mycrmliferay.models.CompanyInfo;
 import com.aalexandrakis.mycrmliferay.models.Customer;
-import com.aalexandrakis.mycrmliferay.models.InvoiceHeader;
 import com.aalexandrakis.mycrmliferay.models.InvoiceDetails;
+import com.aalexandrakis.mycrmliferay.models.InvoiceHeader;
+import com.aalexandrakis.mycrmliferay.resources.InvoiceResource;
 import com.aalexandrakis.mycrmliferay.util.HibernateUtil;
 
 public class InvoiceDaoImpl {
@@ -91,6 +92,8 @@ public class InvoiceDaoImpl {
 		for (InvoiceHeader invoice : invoiceList){
 			invoice.setCustomer((Customer) session.get(Customer.class, invoice.getCustomerId()));
 			invoice.setCompanyInfo((CompanyInfo) session.get(CompanyInfo.class, invoice.getCompanyId()));
+//			invoice.setInvoiceResource(new InvoiceResource(invoice.getInvoiceId()));
+//			System.out.println("Resource " + invoice.getInvoiceResource().getRequestPath());
 		}
 		
 		session.getTransaction().commit();

@@ -1,12 +1,20 @@
 package com.aalexandrakis.mycrmliferay.beans;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.io.IOUtils;
 
 import com.aalexandrakis.mycrmliferay.daoimpl.InvoiceDaoImpl;
 import com.aalexandrakis.mycrmliferay.models.InvoiceHeader;
@@ -95,14 +103,21 @@ public class InvoicesView implements Serializable {
 		this.selectedInvoiceHeader = new InvoiceHeader();
 		return selectedInvoiceHeader;
 	}
-//	 public void onRowSelect(SelectEvent event) {
-//	        FacesMessage msg = new FacesMessage("Company Selected", ((CompanyInfo) event.getObject()).getCompanyId().toString());
-//	        FacesContext.getCurrentInstance().addMessage(null, msg);
-//    }
-// 
-//    public void onRowUnselect(UnselectEvent event) {
-//        FacesMessage msg = new FacesMessage("Company Unselected", ((CompanyInfo) event.getObject()).getCompanyId().toString());
-//        FacesContext.getCurrentInstance().addMessage(null, msg);
-//    }
 	
+	public void showPdf(ActionEvent actionEvent){
+		System.out.println("In Action Event");
+		HttpServletResponse response = (HttpServletResponse)FacesContext.getCurrentInstance().getExternalContext().getResponse();
+		response.setContentType("application/pdf");
+//		response.setContentLength((int) selectedInvoiceHeader.getInvoiceFile().length());
+		try {
+			ServletOutputStream out = response.getOutputStream();
+			IOUtils.copy(selectedInvoiceHeader.getInvoiceFile().getBinaryStream(), out);
+			out.flush();
+			FacesContext.getCurrentInstance().responseComplete();
+		} catch (IOException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+		
 }

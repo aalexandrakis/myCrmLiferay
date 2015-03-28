@@ -141,9 +141,7 @@
 	<portlet>
 		<portlet-name>invoices</portlet-name>
 		<display-name>Invoices</display-name>
-		<portlet-class>
-			javax.portlet.faces.GenericFacesPortlet
-		</portlet-class>
+		<portlet-class>com.aalexandrakis.mycrmliferay.portlets.InvoicesPortlet</portlet-class>
 		<init-param>
 			<name>javax.portlet.faces.defaultViewId.view</name>
 			<value>/views/invoices/invoices-view.xhtml</value>

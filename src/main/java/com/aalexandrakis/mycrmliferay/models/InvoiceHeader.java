@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,6 +31,8 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+
+import com.aalexandrakis.mycrmliferay.resources.InvoiceResource;
 
 /**
  *
@@ -115,12 +116,15 @@ public class InvoiceHeader implements Serializable {
     
     @Transient
     private Customer customer;
+
+//    @Transient
+//    private InvoiceResource invoiceResource;
     
-    public InvoiceHeader() {
+	public InvoiceHeader() {
     }
 
-    public InvoiceHeader(Integer invoiceId) {
-        this.invoiceId = invoiceId;
+	public InvoiceHeader(Integer invoiceId) {
+    	this.invoiceId = invoiceId;
     }
 
     public InvoiceHeader(Integer invoiceId, int companyId, int customerId, BigDecimal amount, BigDecimal fpa, BigDecimal taxis, BigDecimal gross, BigDecimal withHolding, BigDecimal fpaAmount, BigDecimal withHoldingAmount, BigDecimal receivedAmount, Date invoiceDate, String withHoldingString, String words) {
@@ -141,6 +145,7 @@ public class InvoiceHeader implements Serializable {
     }
 
     public Integer getInvoiceId() {
+//    	System.out.println("Resource Url " + this.invoiceResource.getRequestPath());
         return invoiceId;
     }
 
@@ -286,6 +291,20 @@ public class InvoiceHeader implements Serializable {
 		this.customer = customer;
 	}
 
+	
+	
+//	public InvoiceResource getInvoiceResource() {
+//		return invoiceResource;
+//	}
+//
+//	public void setInvoiceResource(InvoiceResource invoiceResource) {
+//		this.invoiceResource = invoiceResource;
+//	}
+//
+//	public String getInvoiceResourceUrl(){
+//		return this.invoiceResource.getRequestPath();
+//	}
+	
 	public void addNewLine(){
 		InvoiceDetails invoiceLine = new InvoiceDetails();
 		if (invoiceDetailsCollection == null){
