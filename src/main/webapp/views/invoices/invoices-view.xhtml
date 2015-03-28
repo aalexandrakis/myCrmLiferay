@@ -13,6 +13,48 @@
 	<h:body>
 		<h:form id="form" >
 		 	   <p:growl id="msgs" showDetail="true" />
+		 	   <div class="ui-grid ui-grid-responsive" >
+  		        	<div class="ui-grid-row">
+  		        		<div class="ui-grid-col-1">
+  		        			<p:outputLabel for="dateFrom" value="Ημερομηνία Από:" style="font-weight:bold"/>
+  		        		</div>
+  		        		<div class="ui-grid-col-4">
+  		        			<p:calendar id="dateFrom" value="#{dtInvoicesView.dateFrom}" pattern="dd-MM-yyyy" mask="true"  showOn="button" />
+  		        		</div>
+  		        		<div class="ui-grid-col-1">
+  		        			<p:outputLabel for="dateTo" value="Έως:" style="font-weight:bold"/>
+  		        		</div>
+  		        		<div class="ui-grid-col-4">
+  		        			<p:calendar id="dateTo" value="#{dtInvoicesView.dateTo}" pattern="dd-MM-yyyy" mask="true"  showOn="button" />
+  		        		</div>
+	        		</div>
+	        		<div class="ui-grid-row">
+  		        		<div class="ui-grid-col-1">
+  		        			<p:commandButton value="Αναζήτηση" id="search" icon="ui-icon-extlink" update=":form:invoicesTable" 
+			 					actionListener="#{dtInvoicesView.searchInvoices()}">
+		 					</p:commandButton>
+  		        		</div>
+  		        		<div class="ui-grid-col-1">
+	   		         		<portlet:resourceURL var="printInvoicesResourceUrl" id="printInvoiceList">
+								<portlet:param name="dateFrom" value="#{dtInvoicesView.dateFromToString}" />
+								<portlet:param name="dateTo" value="#{dtInvoicesView.dateToToString}" />
+							</portlet:resourceURL>        
+				        	<a href="#{printInvoicesResourceUrl}" class="ui-priority-primary">
+				        		<h:outputText value="Print List" />
+							</a>
+  		        		</div>
+  		        		<div class="ui-grid-col-1">
+	   		         		<portlet:resourceURL var="downloadFilesResourceUrl" id="downloadFiles">
+								<portlet:param name="dateFrom" value="#{dtInvoicesView.dateFromToString}" />
+								<portlet:param name="dateTo" value="#{dtInvoicesView.dateToToString}" />
+							</portlet:resourceURL>        
+				        	<a href="#{downloadFilesResourceUrl}" class="ui-priority-primary">
+				        		<h:outputText value="Download Files" />
+							</a>
+  		        		</div>
+	        		</div>
+        		</div>
+		 	   	
 				<p:dataTable id="invoicesTable" var="invoice" value="#{dtInvoicesView.invoices }" >
 			        <!-- <f:facet name="header">
 			            Customers List

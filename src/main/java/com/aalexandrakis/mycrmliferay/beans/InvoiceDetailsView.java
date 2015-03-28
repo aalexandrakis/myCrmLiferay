@@ -9,10 +9,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.portlet.ActionResponse;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletSession;
-import javax.servlet.http.HttpServletResponse;
 
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -50,9 +48,7 @@ public class InvoiceDetailsView implements Serializable {
         PortletRequest portletRequest = (PortletRequest) externalContext.getRequest();
         PortletSession portletSession = portletRequest.getPortletSession();
 	    String companyId = (String)portletSession.getAttribute("companyId",PortletSession.APPLICATION_SCOPE);
-	    System.out.println("Company " + companyId);
 	    String customerId = (String)portletSession.getAttribute("customerId",PortletSession.APPLICATION_SCOPE);
-	    System.out.println("Customer " + customerId);
 	    if (companyId == null){
 	    	facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Λάθος", "Παρακαλώ επιλέξτε εταιρεία"));
 	    }
