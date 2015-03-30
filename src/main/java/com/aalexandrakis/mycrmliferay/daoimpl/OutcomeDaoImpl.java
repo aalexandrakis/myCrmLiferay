@@ -53,7 +53,28 @@ public class OutcomeDaoImpl {
 			session.close();
 		}
 	}
-	
+
+	public static OutcomeHeader saveOutcome(OutcomeHeader outcome) throws Exception {
+		SessionFactory sessionFactory = HibernateUtil.getSessionAnnotationFactory();
+		Session session = sessionFactory.openSession();
+		try{
+			session.beginTransaction();
+			session.saveOrUpdate(outcome);
+			Integer outcomeId = outcome.getOutcomeId();
+//			for (OutcomeDetail outcomeLine : outcome.getOutcomeDetails()){
+//				outcomeLine.setOutcomeId(outcomeId);
+//				session.saveOrUpdate(outcomeLine);
+//			}
+			session.getTransaction().commit();
+			return outcome;
+		} catch (Exception e){
+			session.getTransaction().rollback();
+			throw e;
+		} finally {
+			session.close();
+		}
+	}
+
 	@SuppressWarnings("unchecked")
 	public static List<OutcomeHeader> getOutcomes(Map<String, Object> parms){
 		String query = "from OutcomeHeader";

@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 import java.math.BigDecimal;
 import java.sql.Blob;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -198,6 +199,43 @@ public class OutcomeHeader implements Serializable {
 		this.supplier = supplier;
 	}
 	
+	public void addNewLine(){
+		if (this.outcomeDetails == null) {
+			this.outcomeDetails = new ArrayList<OutcomeDetail>();
+		}
+		this.outcomeDetails.add(new OutcomeDetail(this.outcomeDetails.size() + 1));
+		calculate();
+	}
 	
-
+	public void removeLine(int lineId){  
+		for (OutcomeDetail line : this.outcomeDetails){
+			if (line.getLineId() == lineId){
+				this.outcomeDetails.remove(line);
+				break;
+			}
+		}
+		int i=0;
+		for (OutcomeDetail line : this.outcomeDetails){
+			i++;
+			line.setLineId(i);
+		}
+		calculate();
+	}
+	
+	public void calculate(){
+		this.gross = BigDecimal.ZERO;
+		this.fpaAmount = BigDecimal.ZERO;
+		this.amount = BigDecimal.ZERO;
+		if (this.outcomeDetails != null){
+			for (OutcomeDetail line : this.outcomeDetails){
+				if (line.getNet() != null && !line.getNet().equals(BigDecimal.ZERO)){
+					this.amount = this.amount.add(line.getNet());
+					BigDecimal fpaLineAmount = BigDecimal.ZERO;
+					fpaLineAmount = line.getNet().multiply(line.getFpa()).divide(new BigDecimal("100"));
+					this.fpaAmount = this.fpaAmount.add(fpaLineAmount);
+				}
+			}
+			this.gross = this.fpaAmount.add(this.amount);
+		}
+	}
 }

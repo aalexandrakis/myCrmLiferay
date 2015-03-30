@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+
+<f:view
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+>
+	<h:head />
+        
+	<h:body>
+		<h:form id="form" enctype="multipart/form-data">
+		 	   <p:growl id="msgs" showDetail="true" />
+		 	   <div class="ui-grid ui-grid-responsive" >
+  		        	<div class="ui-grid-row">
+  		        		<div class="ui-grid-col-1">
+  		        			<p:outputLabel for="outcomeDate" value="Ημερομηνία:" style="font-weight:bold"/>
+  		        		</div>
+  		        		<div class="ui-grid-col-4">
+  		        			<p:calendar id="outcomeDate" value="#{dtOutcomeView.outcome.outcomeDate}" pattern="dd-MM-yyyy" mask="true"  showOn="button" />
+  		        		</div>
+  		        		<div class="ui-grid-col-1">
+  		        			<p:outputLabel for="number" value="Αρ. Παραστατικού" style="font-weight:bold"/>
+  		        		</div>
+  		        		<div class="ui-grid-col-4">
+  		        			<h:inputText id="number" value="#{dtOutcomeView.outcome.outcomeNumber}"/>
+  		        		</div>
+  		        	</div>	
+  		        	<div class="ui-grid-row">
+  		        		<div class="ui-grid-col-4"> 
+	        				<p:fileUpload fileUploadListener="#{dtOutcomeView.fileUpload}" mode="advanced" auto="true" sizeLimit="1000000" allowTypes="/(\.|\/)(gif|jpe?g|png|pdf|docx?)$/" />
+	        				
+  		        		</div>
+	        		</div>
+  		        		        		
+        		</div>
+		 		<p:commandButton value="Προσθήκη γραμμής" id="newLine" update="outcomeLinesTable" actionListener="#{dtOutcomeView.outcome.addNewLine}" icon="ui-icon-plus"/>
+				<p:commandButton value="Υπολογισμός" id="calculate" update=":form" actionListener="#{dtOutcomeView.outcome.calculate}" icon="ui-icon-calculator"/>
+				<p:commandButton value="Αποθήκευση" id="save" update=":form" actionListener="#{dtOutcomeView.save}" icon="ui-icon-disk"/>
+				<p:dataTable id="outcomeLinesTable" var="outcomeLine" value="#{dtOutcomeView.outcome.outcomeDetails }" rowKey="#{outcomeLine.lineId}">
+			        <p:column headerText = "Διαγραφή" style="width:5%">  
+			            <p:commandButton update="outcomeLinesTable" actionListener="#{dtOutcomeView.outcome.removeLine(outcomeLine.lineId)}"  
+			                    image="ui-icon ui-icon-circle-close">  
+			            </p:commandButton>  
+			        </p:column> 
+			        <p:column headerText="Γραμμή" style="width:5%">
+			            <h:outputText value="#{outcomeLine.lineId}" />
+			        </p:column>
+			        <p:column headerText="Περιγραφή" style="width:60%">
+			            <h:inputText value="#{outcomeLine.description}" style="width:90%"/>
+			        </p:column>
+			        <p:column headerText="Φ.Π.Α." style="width:15%">
+			            <p:spinner value="#{outcomeLine.fpa}" stepFactor="0.01" size="6"/>
+			        </p:column>
+			        <p:column headerText="Ποσό" style="width:10%">
+			            <h:inputText value="#{outcomeLine.net}"  style="width:80%;text-align:right"/>
+			        </p:column>
+			    </p:dataTable>
+			    <table style="border:1px solid black;width:100%" >
+		    	    <tr>
+			    	    <td></td>
+			    	    <td style="width:70%"></td>
+			    	    <td style="width:10%;text-align:right;font-weight:bold">Καθαρό</td>
+			    	    <td><p:outputLabel value="#{dtOutcomeView.outcome.amount}" style="text-align:right"/></td>
+		    	    </tr>
+		    	    <tr>
+			    	    <td></td>
+  			    	    <td></td>
+			    	    <td style="width:10%;text-align:right;font-weight:bold">Φ.Π.Α</td>
+			    	    <td><p:outputLabel value="#{dtOutcomeView.outcome.fpaAmount}"  style="text-align:right"/></td>
+		    	    </tr>  
+		    	    <tr>
+			    	    <td></td>
+			    	    <td style="width:70%"></td>
+			    	    <td style="width:10%;text-align:right;font-weight:bold">Σύνολο</td>
+			    	    <td><p:outputLabel value="#{dtOutcomeView.outcome.gross}"  style="text-align:right"/></td>
+		    	    </tr>  
+			    </table>
+	    </h:form>
+	</h:body>
+</f:view>

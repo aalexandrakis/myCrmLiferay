@@ -14,5 +14,6 @@
 		<portlet id="selectCustomer"></portlet>
 		<portlet id="selectSupplier"></portlet>
 		<portlet id="invoice"></portlet>
+		<portlet id="outcome"></portlet>
 	</category>
 </display>

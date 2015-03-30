@@ -43,6 +43,10 @@ public class OutcomeDetail implements Serializable {
 	public OutcomeDetail() {
 	}
 
+	public OutcomeDetail(Integer lineId) {
+		this.lineId = lineId;
+	}
+
 	public int getId() {
 		return this.id;
 	}
